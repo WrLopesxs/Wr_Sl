@@ -1,0 +1,1321 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WR Solution | Portfólio</title>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap");
+
+    :root {
+      --bg-1: #eaf2ff;
+      --bg-2: #dff0ff;
+      --bg-3: #f8fbff;
+      --ink: #0a1628;
+      --muted: #4f617c;
+      --blue: #007aff;
+      --cyan: #36d1ff;
+      --glass: rgba(255, 255, 255, 0.5);
+      --glass-strong: rgba(255, 255, 255, 0.66);
+      --line: rgba(255, 255, 255, 0.55);
+      --shadow: 0 20px 60px rgba(14, 42, 90, 0.18);
+      --radius-xl: 30px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --max: 1180px;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", Arial, sans-serif;
+      color: var(--ink);
+      overflow-x: hidden;
+      background:
+        radial-gradient(1000px 600px at -10% -20%, rgba(31, 167, 255, 0.25), transparent 70%),
+        radial-gradient(900px 500px at 110% -10%, rgba(54, 209, 255, 0.24), transparent 70%),
+        linear-gradient(170deg, var(--bg-1), var(--bg-2) 36%, var(--bg-3) 100%);
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      pointer-events: none;
+      opacity: 0.08;
+      background-image: radial-gradient(#0f2f66 0.4px, transparent 0.4px);
+      background-size: 4px 4px;
+    }
+
+    .orbs {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(32px);
+      opacity: 0.65;
+      animation: float 13s ease-in-out infinite alternate;
+    }
+
+    .orb:nth-child(1) {
+      width: 320px;
+      height: 320px;
+      top: -80px;
+      left: -90px;
+      background: rgba(0, 122, 255, 0.3);
+    }
+
+    .orb:nth-child(2) {
+      width: 360px;
+      height: 360px;
+      right: -120px;
+      top: 120px;
+      background: rgba(54, 209, 255, 0.28);
+      animation-delay: 1.2s;
+    }
+
+    .orb:nth-child(3) {
+      width: 240px;
+      height: 240px;
+      left: 35%;
+      top: 44%;
+      background: rgba(80, 165, 255, 0.22);
+      animation-delay: 2.1s;
+    }
+
+    @keyframes float {
+      from { transform: translate3d(0, 0, 0) scale(1); }
+      to { transform: translate3d(25px, -18px, 0) scale(1.08); }
+    }
+
+    .container {
+      width: min(calc(100% - 28px), var(--max));
+      margin-inline: auto;
+    }
+
+    .glass {
+      background: linear-gradient(150deg, var(--glass-strong), var(--glass));
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px) saturate(170%);
+      -webkit-backdrop-filter: blur(18px) saturate(170%);
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    .nav-wrap {
+      position: sticky;
+      top: 12px;
+      z-index: 1000;
+      padding-top: 10px;
+    }
+
+    .nav {
+      border-radius: 999px;
+      padding: 8px 12px;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      min-height: 62px;
+      padding-inline: 12px;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      font-size: 0.98rem;
+      letter-spacing: 0.01em;
+    }
+
+    .brand-logo {
+      width: 70px;
+      height: 70px;
+      border-radius: 30px;
+      object-fit: cover;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      box-shadow: 0 10px 24px rgba(0, 77, 170, 0.24);
+    }
+
+    .nav-toggle {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.58);
+      color: var(--ink);
+      font-size: 1.2rem;
+      cursor: pointer;
+    }
+
+    .nav-dark {
+      min-width: 40px;
+      min-height: 40px;
+      padding: 0 12px;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 18px;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.94rem;
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .btn,
+    .btn-ghost {
+      border: 0;
+      border-radius: 999px;
+      padding: 12px 20px;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .btn {
+      color: #fff;
+      background: linear-gradient(135deg, #007aff, #34c4ff);
+      box-shadow: 0 14px 28px rgba(0, 122, 255, 0.36);
+    }
+
+    .btn-ghost {
+      color: var(--ink);
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      box-shadow: 0 10px 22px rgba(26, 53, 95, 0.14);
+    }
+
+    .btn:hover,
+    .btn-ghost:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 86px 0 58px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 18px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual {
+      border-radius: var(--radius-xl);
+      padding: 30px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-copy::before,
+    .hero-visual::before {
+      content: "";
+      position: absolute;
+      width: 180px;
+      height: 180px;
+      border-radius: 999px;
+      top: -70px;
+      right: -60px;
+      background: radial-gradient(circle, rgba(76, 186, 255, 0.34), rgba(76, 186, 255, 0));
+      pointer-events: none;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      border-radius: 999px;
+      padding: 9px 14px;
+      margin-bottom: 18px;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: #0459ad;
+      border: 1px solid rgba(102, 183, 247, 0.36);
+      background: rgba(255, 255, 255, 0.56);
+    }
+
+    h1 {
+      font-size: clamp(2.2rem, 5vw, 4.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.04em;
+      margin-bottom: 14px;
+    }
+
+    h2 {
+      font-size: clamp(1.75rem, 3vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+      margin-bottom: 12px;
+    }
+
+    p {
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .hero-copy p {
+      max-width: 680px;
+      margin-bottom: 20px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .quick-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .stat-mini {
+      border-radius: var(--radius-md);
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: rgba(255, 255, 255, 0.58);
+    }
+
+    .stat-mini strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 1.15rem;
+    }
+
+    .stat-mini span {
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    .glass-stage {
+      border-radius: 24px;
+      border: 1px solid rgba(255, 255, 255, 0.78);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.75), rgba(234, 245, 255, 0.7));
+      min-height: 320px;
+      padding: 18px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .logo-showcase {
+      position: relative;
+      min-height: 190px;
+      border-radius: 18px;
+      border: 1px solid rgba(255, 255, 255, 0.86);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(223, 241, 255, 0.72));
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+
+    .logo-showcase::before {
+      content: "";
+      position: absolute;
+      width: 220px;
+      height: 220px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(0, 122, 255, 0.28), rgba(0, 122, 255, 0));
+      filter: blur(5px);
+    }
+
+    .glass-stage img {
+      width: min(100%, 310px);
+      max-height: 170px;
+      object-fit: contain;
+      margin-inline: auto;
+      border-radius: 16px;
+      position: relative;
+      z-index: 1;
+      box-shadow: 0 20px 38px rgba(17, 52, 92, 0.24);
+    }
+
+    .stage-bars {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .bar {
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.88);
+      background: rgba(255, 255, 255, 0.68);
+    }
+
+    .bar span {
+      display: block;
+      font-size: 0.84rem;
+      color: var(--muted);
+      margin-bottom: 5px;
+    }
+
+    .bar strong {
+      font-size: 1rem;
+    }
+
+    section {
+      padding: 58px 0;
+    }
+
+    .section-head {
+      max-width: 740px;
+      margin-bottom: 20px;
+    }
+
+    .tag {
+      display: inline-block;
+      margin-bottom: 8px;
+      font-size: 0.74rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 800;
+      color: #1665b9;
+    }
+
+    .grid-4,
+    .grid-3,
+    .grid-6 {
+      display: grid;
+      gap: 12px;
+    }
+
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-6 { grid-template-columns: repeat(6, 1fr); }
+
+    .card {
+      border-radius: var(--radius-lg);
+      padding: 20px;
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 25px 44px rgba(17, 44, 85, 0.22);
+    }
+
+    .icon {
+      width: 46px;
+      height: 46px;
+      border-radius: 14px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 14px;
+      font-weight: 800;
+      color: #0558ac;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(112, 186, 241, 0.38);
+    }
+
+    .card h3 {
+      margin-bottom: 7px;
+      font-size: 1.16rem;
+    }
+
+    .case-wrap,
+    .contact-wrap {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .case-card,
+    .gallery,
+    .contact-main,
+    .contact-side {
+      border-radius: var(--radius-xl);
+      padding: 22px;
+    }
+
+    .pill {
+      display: inline-flex;
+      border-radius: 999px;
+      font-size: 0.83rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      margin-bottom: 12px;
+      color: #0558ac;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px solid rgba(112, 186, 241, 0.36);
+    }
+
+    .bullet-list {
+      display: grid;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .bullet {
+      display: flex;
+      gap: 10px;
+      line-height: 1.6;
+    }
+
+    .bullet::before {
+      content: "●";
+      color: #0f88ff;
+      font-size: 0.64rem;
+      margin-top: 5px;
+    }
+
+    .screen {
+      min-height: 200px;
+      border-radius: 16px;
+      border: 1px dashed rgba(38, 123, 199, 0.34);
+      background:
+        linear-gradient(140deg, rgba(0, 122, 255, 0.09), rgba(54, 209, 255, 0.12)),
+        repeating-linear-gradient(90deg, rgba(32, 115, 189, 0.08) 0 1px, transparent 1px 66px),
+        #fff;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      color: #17528e;
+      font-weight: 700;
+      padding: 16px;
+    }
+
+    .screen img {
+      width: 100%;
+      max-height: 320px;
+      object-fit: cover;
+      border-radius: 12px;
+      cursor: zoom-in;
+      transition: transform 0.25s ease, filter 0.25s ease;
+      box-shadow: 0 14px 30px rgba(17, 52, 92, 0.22);
+    }
+
+    .screen img:hover {
+      transform: scale(1.015);
+      filter: saturate(1.06);
+    }
+
+    .screen-grid {
+      margin-top: 10px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .project-media {
+      min-height: 150px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      font-weight: 700;
+      color: #10508e;
+      border: 1px solid rgba(111, 182, 233, 0.34);
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(229, 243, 255, 0.72));
+    }
+
+    .tile {
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      font-weight: 700;
+      color: #125292;
+      border: 1px solid rgba(255, 255, 255, 0.8);
+      background: rgba(255, 255, 255, 0.6);
+      box-shadow: 0 10px 24px rgba(19, 52, 95, 0.14);
+    }
+
+    .big {
+      text-align: center;
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.62);
+      box-shadow: 0 10px 24px rgba(19, 52, 95, 0.14);
+    }
+
+    .big strong {
+      display: block;
+      font-size: clamp(1.35rem, 2.8vw, 2.2rem);
+      margin-bottom: 6px;
+    }
+
+    .contact-list {
+      margin-top: 14px;
+      display: grid;
+      gap: 10px;
+    }
+
+    .contact-item {
+      border-radius: 14px;
+      padding: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.82);
+      background: rgba(255, 255, 255, 0.6);
+      color: var(--muted);
+    }
+
+    .contact-item strong {
+      display: block;
+      color: var(--ink);
+      margin-bottom: 2px;
+    }
+
+    .footer {
+      padding: 24px 0 34px;
+    }
+
+    .footer-inner {
+      border-top: 1px solid rgba(118, 151, 200, 0.3);
+      padding-top: 16px;
+      display: flex;
+      gap: 10px;
+      justify-content: space-between;
+      color: var(--muted);
+      font-size: 0.93rem;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(34px) scale(0.985);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+      will-change: transform, opacity;
+    }
+
+    .reveal.show {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+
+    body.dark {
+      background:
+        radial-gradient(1000px 600px at -10% -20%, rgba(46, 107, 196, 0.18), transparent 70%),
+        radial-gradient(900px 500px at 110% -10%, rgba(36, 140, 179, 0.16), transparent 70%),
+        #0b1220;
+      color: #e8eefc;
+    }
+
+    body.dark h1,
+    body.dark h2,
+    body.dark h3,
+    body.dark strong,
+    body.dark .brand,
+    body.dark .contact-item strong {
+      color: #f3f7ff;
+    }
+
+    body.dark p,
+    body.dark span,
+    body.dark .footer-inner,
+    body.dark .bar span,
+    body.dark .stat-mini span,
+    body.dark .contact-item {
+      color: #b8c6e4;
+    }
+
+    body.dark .tag,
+    body.dark .pill {
+      color: #8cc6ff;
+    }
+
+    body.dark .glass,
+    body.dark .card,
+    body.dark .tile,
+    body.dark .big,
+    body.dark .stat-mini,
+    body.dark .bar,
+    body.dark .contact-item {
+      background: rgba(17, 27, 45, 0.78);
+      border: 1px solid rgba(125, 157, 209, 0.24);
+      box-shadow: 0 12px 30px rgba(4, 12, 27, 0.42);
+    }
+
+    body.dark .nav {
+      background: rgba(8, 14, 26, 0.88);
+      border-color: rgba(140, 169, 214, 0.22);
+    }
+
+    body.dark .nav-links a {
+      color: #c9d6f2;
+      background: rgba(26, 39, 62, 0.78);
+      border-color: rgba(132, 164, 214, 0.3);
+    }
+
+    body.dark .nav-links a:hover {
+      color: #ffffff;
+    }
+
+    body.dark .btn-ghost {
+      background: rgba(26, 39, 62, 0.92);
+      border: 1px solid rgba(132, 164, 214, 0.35);
+      color: #e9f1ff;
+    }
+
+    body.dark .screen,
+    body.dark .project-media {
+      background: rgba(13, 21, 36, 0.92);
+      border: 1px solid rgba(124, 157, 211, 0.28);
+      color: #d8e5ff;
+    }
+
+    body.dark .eyebrow,
+    body.dark .icon {
+      background: rgba(26, 39, 62, 0.82);
+      border-color: rgba(132, 164, 214, 0.34);
+      color: #9fd0ff;
+    }
+
+    .image-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      display: grid;
+      place-items: center;
+      background: rgba(7, 16, 30, 0.82);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.22s ease;
+      padding: 18px;
+    }
+
+    .image-modal.show {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .image-modal img {
+      width: min(96vw, 1200px);
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 14px;
+      border: 1px solid rgba(255, 255, 255, 0.35);
+      box-shadow: 0 26px 60px rgba(0, 0, 0, 0.45);
+      background: rgba(255, 255, 255, 0.06);
+    }
+
+    .modal-close {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      width: 42px;
+      height: 42px;
+      border: 0;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.16);
+      color: #fff;
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      backdrop-filter: blur(4px);
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .grid-6,
+      .case-wrap,
+      .contact-wrap {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .quick-stats {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 790px) {
+      .nav {
+        border-radius: 16px;
+        padding: 6px 8px;
+      }
+
+      .nav-inner {
+        display: grid;
+        grid-template-columns: 1fr auto auto;
+        align-items: center;
+        gap: 10px;
+        min-height: 52px;
+        padding-inline: 4px;
+      }
+
+      .brand {
+        grid-column: 1;
+        grid-row: 1;
+      }
+
+      .nav-toggle {
+        display: grid;
+        place-items: center;
+        grid-column: 2;
+        grid-row: 1;
+      }
+
+      .nav-dark {
+        grid-column: 3;
+        grid-row: 1;
+        display: grid;
+        place-items: center;
+        width: 40px;
+        min-width: 40px;
+        height: 40px;
+        min-height: 40px;
+        padding: 0;
+        border-radius: 12px;
+      }
+
+      .nav-links {
+        grid-column: 1 / -1;
+        grid-row: 2;
+        width: 100%;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        overflow-x: auto;
+        overflow-y: hidden;
+        flex-wrap: nowrap;
+        justify-content: flex-start;
+        gap: 8px;
+        padding-bottom: 0;
+        scrollbar-width: none;
+        transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        display: none;
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+        font-size: 0.82rem;
+        padding: 6px 10px;
+        border-radius: 999px;
+        background: rgba(255, 255, 255, 0.52);
+        border: 1px solid rgba(255, 255, 255, 0.78);
+      }
+
+      .brand {
+        font-size: 0.88rem;
+      }
+
+      .brand-logo {
+        width: 36px;
+        height: 36px;
+        border-radius: 10px;
+      }
+
+      .nav-cta {
+        grid-column: 1 / -1;
+        grid-row: 3;
+        width: 100%;
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        pointer-events: none;
+        padding: 0;
+        transition: max-height 0.25s ease, opacity 0.2s ease, padding 0.2s ease;
+      }
+
+      .nav .btn {
+        padding: 9px 12px;
+        font-size: 0.78rem;
+      }
+
+      .nav-inner.open .nav-links {
+        max-height: 88px;
+        opacity: 1;
+        pointer-events: auto;
+        padding-top: 4px;
+        padding-bottom: 2px;
+      }
+
+      .nav-inner.open .nav-cta {
+        max-height: 56px;
+        opacity: 1;
+        pointer-events: auto;
+        padding: 9px 12px;
+      }
+
+      .hero,
+      section {
+        padding: 42px 0;
+      }
+
+      .hero-grid,
+      .grid-4,
+      .grid-3,
+      .grid-6,
+      .case-wrap,
+      .contact-wrap,
+      .stage-bars,
+      .screen-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .case-card,
+      .gallery,
+      .contact-main,
+      .contact-side {
+        padding: 18px;
+      }
+
+      .logo-showcase {
+        min-height: 160px;
+      }
+
+      .glass-stage img {
+        width: min(100%, 240px);
+        max-height: 140px;
+      }
+
+      .hero-actions,
+      .footer-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      #darkToggle{
+  width:42px;
+  height:42px;
+  padding:0;
+  font-size:18px;
+}
+    }
+  </style>
+</head>
+<body>
+  <div class="noise"></div>
+  <div class="orbs">
+    <div class="orb"></div>
+    <div class="orb"></div>
+    <div class="orb"></div>
+  </div>
+
+  <div class="nav-wrap">
+    <nav class="container nav glass">
+      <div class="nav-inner">
+        
+        <a class="brand" href="#inicio">
+          <img class="brand-logo" src="imgs/logo_resized.jpg" alt="Logo WR Solution" />
+          <span>WR Solution</span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">☰</button>
+        <div class="nav-links">
+          <a href="#sobre">Sobre</a>
+          <a href="#clientes">Clientes</a>
+          <a href="#portfolio">Portfólio</a>
+          <a href="#tecnologias">Tecnologias</a>
+          <a href="#contato">Contato</a>
+        </div>
+
+        <a class="btn nav-cta" href="#contato">Solicitar solução</a>
+        <button id="darkToggle" class="btn-ghost nav-dark">🌙</button>
+      </div>
+    </nav>
+  </div>
+
+  <header class="hero" id="inicio">
+    <div class="container hero-grid">
+      <div class="hero-copy glass reveal">
+        <span class="eyebrow">Sistemas, relatórios e automações para empresas</span>
+        <h1>Portfólio executivo com estética glass de alto padrão.</h1>
+        <p>
+          A <strong>WR Solution</strong> desenvolve plataformas personalizadas para operações industriais e empresas
+          que exigem clareza de dados, controle de processo e tomada de decisão com velocidade.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#portfolio">Ver projetos</a>
+          <a class="btn-ghost" href="#clientes">Empresas atendidas</a>
+        </div>
+        <div class="quick-stats">
+          <div class="stat-mini"><strong>3 sistemas</strong><span>entregues em ambiente real</span></div>
+          <div class="stat-mini"><strong>Foco B2B</strong><span>operação, gestão e relatórios</span></div>
+          <div class="stat-mini"><strong>Alta clareza</strong><span>dados visuais para decisão rápida</span></div>
+        </div>
+      </div>
+
+      <div class="hero-visual glass reveal">
+        <div class="glass-stage">
+          <div class="logo-showcase">
+            <img src="imgs/logo.jpg" alt="Logo WR Solution" />
+          </div>
+          <div class="stage-bars">
+            <div class="bar"><span>Especialidade</span><strong>Relatórios + Sistemas</strong></div>
+            <div class="bar"><span>Modelo</span><strong>Sob medida</strong></div>
+            <div class="bar"><span>Aplicação</span><strong>Operação e gestão</strong></div>
+            <div class="bar"><span>Entrega</span><strong>Visual + funcional</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <section id="sobre">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Sobre a empresa</span>
+        <h2>Tecnologia aplicada para resolver problemas reais da operação.</h2>
+        <p>
+          Criamos sistemas de relatórios, dashboards e automações com foco em produtividade, previsibilidade e eficiência.
+          O objetivo é transformar processos manuais em soluções robustas, elegantes e fáceis de usar.
+        </p>
+      </div>
+      <div class="grid-4 reveal">
+        <article class="card glass">
+          <div class="icon">01</div>
+          <h3>Sistemas personalizados</h3>
+          <p>Ferramentas alinhadas ao fluxo real da empresa para ganho de controle e performance.</p>
+        </article>
+        <article class="card glass">
+          <div class="icon">02</div>
+          <h3>Dashboards e relatórios</h3>
+          <p>Indicadores claros com interface visual limpa para decisões mais confiáveis.</p>
+        </article>
+        <article class="card glass">
+          <div class="icon">03</div>
+          <h3>Automação de processos</h3>
+          <p>Redução de tarefas manuais e integração de dados para operações mais ágeis.</p>
+        </article>
+        <article class="card glass">
+          <div class="icon">04</div>
+          <h3>Soluções tecnológicas</h3>
+          <p>Projetos voltados para escala, confiabilidade e visão estratégica da operação.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="clientes">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Empresas que pode colaborar com meu sisema</span>
+        <h2>Casos reais aplicados em ambiente corporativo.</h2>
+         </div>
+      <div class="case-wrap">
+        <article class="case-card glass reveal">
+          <span class="pill">colaboração em destaque</span>
+          <h2 style="font-size: clamp(1.8rem, 4vw, 2.4rem); margin-bottom: 8px; color: #EB0A1E;">
+  Toyota
+</h2><p>
+            Desenvolvimento de sistemas internos para monitoramento de consumo, controle operacional e geração de
+            relatórios práticos para suporte à gestão.
+          </p>
+          <div class="bullet-list">
+            <div class="bullet">Sistemas com foco em análise e acompanhamento operacional.</div>
+            <div class="bullet">Interface clara para leitura rápida de dados.</div>
+            <div class="bullet">Projetos aplicados em uso real no ambiente da empresa.</div>
+            <div class="bullet">Estrutura pronta para destacar seus 3 sistemas.</div>
+          </div>
+        </article>
+      <div class="gallery glass reveal">
+
+  <div class="screen">
+    <img src="imgs/img1.png" alt="Sistema rodando na Toyota">
+  </div>
+
+  <div class="screen-grid">
+    <div class="screen" style="min-height: 145px;">
+      <img src="imgs/img4.png" alt="Dashboard do sistema">
+    </div>
+
+    <div class="screen" style="min-height: 145px;">
+      <img src="imgs/img2.png" alt="Relatório do sistema">
+    </div>
+  </div>
+
+</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="portfolio">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Portfólio</span>
+        <h2>Projetos desenvolvidos pela WR Solution</h2>
+        
+      </div>
+      <div class="grid-3 reveal">
+        <article class="card glass">
+          <div class="project-media">Sistema 1<br />Monitoramento de Consumo</div>
+          <h3>Painel de consumo e previsão</h3>
+          <p>Leitura operacional e prevenção de faltas com indicadores em tempo hábil.</p>
+        </article>
+        <article class="card glass">
+          <div class="project-media">Sistema 2<br />Gestão de Estoque</div>
+          <h3>Controle e criticidade</h3>
+          <p>Indicadores de risco e apoio direto à rotina de abastecimento.</p>
+        </article>
+        <article class="card glass">
+          <div class="project-media">Sistema 3<br />Dashboard Operacional</div>
+          <h3>Relatórios e decisão</h3>
+          <p>Visão consolidada de operação para decisões mais rápidas.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Diferenciais</span>
+        <h2>O que sua operação ganha com a WR Solution.</h2>
+      </div>
+      <div class="grid-4 reveal">
+        <div class="big"><strong>+ Controle</strong><span>Mais visibilidade dos processos críticos.</span></div>
+        <div class="big"><strong>+ Velocidade</strong><span>Menos esforço manual no dia a dia.</span></div>
+        <div class="big"><strong>+ Clareza</strong><span>Leitura objetiva para equipes e gestão.</span></div>
+        <div class="big"><strong>+ Solução</strong><span>Tecnologia aplicada ao problema real.</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="tecnologias">
+    <div class="container">
+      <div class="section-head reveal">
+        <span class="tag">Tecnologias</span>
+        <h2>Base técnica para soluções sob medida.</h2>
+       
+      </div>
+      <div class="grid-6 reveal">
+        <div class="tile">JavaScript</div>
+        <div class="tile">HTML</div>
+        <div class="tile">CSS</div>
+        <div class="tile">APIs</div>
+        <div class="tile">Dashboards</div>
+        <div class="tile">Automação</div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="container contact-wrap">
+      <article class="contact-main glass reveal">
+        <div class="section-head" style="margin-bottom: 0;">
+          <span class="tag">Contato</span>
+          <h2>Vamos criar uma solução para sua empresa.</h2>
+          <p>
+            Se sua empresa precisa de sistemas, relatórios e dashboards, a WR Solution pode desenvolver uma solução
+            personalizada para sua realidade operacional.
+          </p>
+        </div>
+        <div class="hero-actions" style="margin-top: 20px; margin-bottom: 0;">
+         <a class="btn" href="https://wa.me/5515992587986?text=Olá,%20tenho%20interesse%20nos%20sistemas%20da%20WR%20Solution%20e%20gostaria%20de%20mais%20informações." target="_blank">
+Falar no WhatsApp
+</a> <a class="btn-ghost" href="mailto:wender.lopesxs@gmail.com">Enviar e-mail</a>
+         </div>
+      </article>
+      <aside class="contact-side glass reveal">
+        <h3 style="font-size: 1.25rem; margin-bottom: 4px;">Informações</h3>
+        <div class="contact-list">
+          <div class="contact-item"><strong>WhatsApp</strong>(15) 99258-7986</div>
+          <div class="contact-item"><strong>E-mail</strong>wender.lopesxs@gmail.com</div>
+          <div class="contact-item"><strong>Atendimento</strong>Soluções para empresas e operações industriais</div>
+         
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>© 2026 WR Solution. Todos os direitos reservados.</div>
+      <div>Sistemas, relatórios e soluções tecnológicas para empresas.</div>
+    </div>
+  </footer>
+
+  <div class="image-modal" id="imageModal" aria-hidden="true">
+    <button class="modal-close" id="modalClose" aria-label="Fechar imagem">×</button>
+    <img id="modalImage" src="" alt="Visualização ampliada" />
+  </div>
+
+  <script>
+    const revealItems = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          entry.target.classList.add("show");
+          observer.unobserve(entry.target);
+        });
+      },
+      { threshold: 0.16, rootMargin: "0px 0px -70px 0px" }
+    );
+
+    revealItems.forEach((item, i) => {
+      item.style.transitionDelay = (i % 4) * 0.08 + "s";
+      observer.observe(item);
+    });
+
+    const easeInOutCubic = (t) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+
+    const smoothScrollTo = (targetY, duration = 780) => {
+      const startY = window.scrollY;
+      const distance = targetY - startY;
+      const startTime = performance.now();
+
+      const step = (currentTime) => {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const eased = easeInOutCubic(progress);
+        window.scrollTo(0, startY + distance * eased);
+        if (progress < 1) requestAnimationFrame(step);
+      };
+
+      requestAnimationFrame(step);
+    };
+
+    const bindSmoothAnchor = (link) => {
+      link.addEventListener("click", (event) => {
+        const href = link.getAttribute("href");
+        if (!href || href === "#") return;
+
+        const target = document.querySelector(href);
+        if (!target) return;
+
+        event.preventDefault();
+        const navHeight = document.querySelector(".nav-wrap")?.offsetHeight ?? 0;
+        const offset = navHeight + 14;
+        const targetY = target.getBoundingClientRect().top + window.scrollY - offset;
+        const distance = Math.abs(targetY - window.scrollY);
+        const dynamicDuration = Math.min(1250, Math.max(700, distance * 0.75));
+        smoothScrollTo(targetY, dynamicDuration);
+
+        if (window.matchMedia("(max-width: 790px)").matches) {
+          navInner?.classList.remove("open");
+          navToggle?.setAttribute("aria-expanded", "false");
+          navToggle.textContent = "☰";
+        }
+      });
+    };
+
+    document.querySelectorAll(".nav-links a[href^='#']").forEach(bindSmoothAnchor);
+    document.querySelectorAll(".hero-actions a[href^='#'], .brand[href^='#']").forEach(bindSmoothAnchor);
+
+    const navInner = document.querySelector(".nav-inner");
+    const navToggle = document.querySelector(".nav-toggle");
+
+    navToggle?.addEventListener("click", () => {
+      const isOpen = navInner.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", String(isOpen));
+      navToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    window.addEventListener("resize", () => {
+      if (!window.matchMedia("(max-width: 790px)").matches) {
+        navInner?.classList.remove("open");
+        navToggle?.setAttribute("aria-expanded", "false");
+        if (navToggle) navToggle.textContent = "☰";
+      }
+    });
+
+    const imageModal = document.getElementById("imageModal");
+    const modalImage = document.getElementById("modalImage");
+    const modalClose = document.getElementById("modalClose");
+    const galleryImages = document.querySelectorAll(".gallery .screen img");
+
+    const closeModal = () => {
+      imageModal.classList.remove("show");
+      imageModal.setAttribute("aria-hidden", "true");
+      modalImage.src = "";
+    };
+
+    galleryImages.forEach((img) => {
+      img.addEventListener("click", () => {
+        modalImage.src = img.src;
+        modalImage.alt = img.alt || "Imagem ampliada";
+        imageModal.classList.add("show");
+        imageModal.setAttribute("aria-hidden", "false");
+      });
+    });
+
+    modalClose.addEventListener("click", closeModal);
+    imageModal.addEventListener("click", (event) => {
+      if (event.target === imageModal) closeModal();
+    });
+
+    window.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && imageModal.classList.contains("show")) {
+        closeModal();
+      }
+    });
+
+    const nav = document.querySelector(".nav");
+    const onScroll = () => {
+      const y = window.scrollY;
+      nav.style.transform = y > 20 ? "translateY(0) scale(0.992)" : "translateY(0) scale(1)";
+      document.querySelectorAll(".orb").forEach((orb, i) => {
+        const speed = (i + 1) * 0.015;
+        orb.style.transform = `translate3d(0, ${y * speed}px, 0)`;
+      });
+    };
+
+    window.addEventListener("scroll", onScroll, { passive: true });
+
+    const darkToggle = document.getElementById("darkToggle");
+    const STORAGE_KEY = "darkMode";
+
+    const applyDarkMode = (enabled) => {
+      document.body.classList.toggle("dark", enabled);
+      if (!darkToggle) return;
+      darkToggle.textContent = enabled ? "☀️" : "🌙";
+      darkToggle.setAttribute("aria-label", enabled ? "Ativar modo claro" : "Ativar modo escuro");
+      darkToggle.setAttribute("title", enabled ? "Modo claro" : "Modo escuro");
+    };
+
+    const savedPreference = localStorage.getItem(STORAGE_KEY);
+    if (savedPreference === "true" || savedPreference === "false") {
+      applyDarkMode(savedPreference === "true");
+    } else {
+      const systemPrefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      applyDarkMode(systemPrefersDark);
+    }
+
+    darkToggle?.addEventListener("click", () => {
+      const nextState = !document.body.classList.contains("dark");
+      applyDarkMode(nextState);
+      localStorage.setItem(STORAGE_KEY, String(nextState));
+    });
+  </script>
+</body>
+</html>
