@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
@@ -549,6 +549,13 @@
       color: #10508e;
       border: 1px solid rgba(111, 182, 233, 0.34);
       background: linear-gradient(180deg, rgba(255, 255, 255, 0.78), rgba(229, 243, 255, 0.72));
+      cursor: zoom-in;
+      transition: transform 0.25s ease, filter 0.25s ease;
+    }
+
+    .project-media:hover {
+      transform: scale(1.015);
+      filter: saturate(1.06);
     }
 
     .tile {
@@ -1075,22 +1082,27 @@
         <h2>Projetos desenvolvidos pela WR Solution</h2>
         
       </div>
-      <div class="grid-3 reveal">
-        <article class="card glass">
-          <div class="project-media">Sistema 1<br />Monitoramento de Consumo</div>
-          <h3>Painel de consumo e previsão</h3>
-          <p>Leitura operacional e prevenção de faltas com indicadores em tempo hábil.</p>
-        </article>
-        <article class="card glass">
-          <div class="project-media">Sistema 2<br />Gestão de Estoque</div>
-          <h3>Controle e criticidade</h3>
-          <p>Indicadores de risco e apoio direto à rotina de abastecimento.</p>
-        </article>
-        <article class="card glass">
-          <div class="project-media">Sistema 3<br />Dashboard Operacional</div>
-          <h3>Relatórios e decisão</h3>
-          <p>Visão consolidada de operação para decisões mais rápidas.</p>
-        </article>
+    <div class="grid-3 reveal">
+  
+  <article class="card glass">
+    <img src="imgs/2.jpg" alt="Monitoramento de Consumo" class="project-media">
+    <h3>Painel de consumo e previsão</h3>
+    <p>Leitura operacional e prevenção de faltas com indicadores em tempo hábil.</p>
+  </article>
+
+  <article class="card glass">
+    <img src="imgs/3.jpg" alt="Gestão de Estoque" class="project-media">
+    <h3>Controle e criticidade</h3>
+    <p>Indicadores de risco e apoio direto à rotina de abastecimento.</p>
+  </article>
+
+  <article class="card glass">
+    <img src="imgs/1.jpg" alt="Dashboard Operacional" class="project-media">
+    <h3>Relatórios e decisão</h3>
+    <p>Visão consolidada de operação para decisões mais rápidas.</p>
+  </article>
+
+</div>
       </div>
     </div>
   </section>
@@ -1252,7 +1264,7 @@ Falar no WhatsApp
     const imageModal = document.getElementById("imageModal");
     const modalImage = document.getElementById("modalImage");
     const modalClose = document.getElementById("modalClose");
-    const galleryImages = document.querySelectorAll(".gallery .screen img");
+    const expandableImages = document.querySelectorAll(".gallery .screen img, .project-media");
 
     const closeModal = () => {
       imageModal.classList.remove("show");
@@ -1260,7 +1272,7 @@ Falar no WhatsApp
       modalImage.src = "";
     };
 
-    galleryImages.forEach((img) => {
+    expandableImages.forEach((img) => {
       img.addEventListener("click", () => {
         modalImage.src = img.src;
         modalImage.alt = img.alt || "Imagem ampliada";
